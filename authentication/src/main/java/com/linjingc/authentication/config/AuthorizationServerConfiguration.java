@@ -41,8 +41,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .scopes("select")
                 .authorities("oauth2")
                 .secret("123456")
-                .accessTokenValiditySeconds(1000)
-                .refreshTokenValiditySeconds(1000);
+                .accessTokenValiditySeconds(100)
+                .refreshTokenValiditySeconds(100);
     }
 
 

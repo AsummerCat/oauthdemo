@@ -32,6 +32,13 @@ public class OAuthClientUtil {
 
     private static Logger logger = LoggerFactory.getLogger(OAuthClientUtil.class.getName());
 
+    /**
+     * 获取token
+     * @param username
+     * @param password
+     * @return
+     * @throws OAuthProblemException
+     */
     public String getApiToken(String username, String password)throws OAuthProblemException {
         logger.info("api getApiToken");
         String accessToken = null;
@@ -45,6 +52,38 @@ public class OAuthClientUtil {
                     .setClientId(clientId)
                     .setClientSecret(secret)
                     .setScope(scope)
+                    .buildQueryMessage();
+
+            request.addHeader("Accept", "application/json");
+            request.addHeader("Content-Type", "application/json");
+
+            OAuthAccessTokenResponse oAuthResponse = oAuthClient.accessToken(request, OAuth.HttpMethod.POST); //去服务端请求access_token，并返回响应
+            accessToken = oAuthResponse.getAccessToken(); //获取服务端返回过来的access_token
+            logger.info("api token: " + accessToken);
+        } catch (OAuthSystemException e) {
+            e.printStackTrace();
+        }
+        return accessToken;
+    }
+
+    /**
+     * 刷新token
+     * @param token
+     * @return
+     * @throws OAuthProblemException
+     */
+    public String refreshToken(String token) throws OAuthProblemException {
+        String accessToken = null;
+
+        OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
+        try {
+            OAuthClientRequest request = OAuthClientRequest
+                    .tokenLocation(authorizationUrl)
+                    .setGrantType(GrantType.REFRESH_TOKEN)
+                    .setClientId(clientId)
+                    .setClientSecret(secret)
+                    .setScope(scope)
+                    .setRefreshToken(token)
                     .buildQueryMessage();
 
             request.addHeader("Accept", "application/json");

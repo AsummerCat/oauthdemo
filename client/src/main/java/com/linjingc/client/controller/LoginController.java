@@ -4,6 +4,7 @@ import com.linjingc.client.utils.OAuthClientUtil;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -46,6 +47,11 @@ public class LoginController {
         }
         request.getSession(false).setAttribute("token",apiToken);
     return  "hello";
+    }
+
+    @GetMapping("/testPath")
+    public String testPath() {
+        return "欢迎";
     }
 
 

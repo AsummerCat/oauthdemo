@@ -13,3 +13,7 @@ server:
 
 logging.level.org.springframework.security: DEBUG
 
+security:
+  oauth2:
+    client:
+      refresh-token-validity-seconds:  500
