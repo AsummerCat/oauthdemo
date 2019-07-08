@@ -15,11 +15,16 @@ logging.level.org.springframework.security: DEBUG
 
 security:
   oauth2:
-    resource:
-      token-info-uri: http://localhost:9005/oauth/check_token
-      user-info-uri: http://localhost:9005/user
-    authorization:
-      check-token-access: http://localhost:9005/oauth/check_token
-    sso:
-      login-path:
+ #   resource:
+#      token-info-uri: http://localhost:9005/oauth/check_token
+#      user-info-uri: http://localhost:9005/user
+   # authorization:
+#      check-token-access: http://localhost:9005/oauth/check_token
+  #  sso:
+      login-path: /
+
+
+basic:
+  errorUrl:
+    unauthorized: http://localhost:8100/error/401
 

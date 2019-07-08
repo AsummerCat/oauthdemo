@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
- * 认证服务
+ * 授权服务
  */
 @Configuration
 @EnableAuthorizationServer
@@ -41,8 +41,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .scopes("select")
                 .authorities("oauth2")
                 .secret("123456")
-                .accessTokenValiditySeconds(100)
-                .refreshTokenValiditySeconds(100);
+                .accessTokenValiditySeconds(1000)
+                .refreshTokenValiditySeconds(1000);
     }
 
 
@@ -61,7 +61,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("permitAll()")
                 .allowFormAuthenticationForClients();
-
+        security.accessDeniedHandler(new CustomAccessDeniedHandler());
     }
+
 
 }
