@@ -27,8 +27,6 @@ public class AuthExceptionEntryPoint extends OAuth2AuthenticationEntryPoint {
     private String url;
     @Autowired
     private OAuth2ClientProperties oAuth2ClientProperties;
-    @Autowired
-    private BaseOAuth2ProtectedResourceDetails baseOAuth2ProtectedResourceDetails;
     private WebResponseExceptionTranslator<?> exceptionTranslator = new DefaultWebResponseExceptionTranslator();
     @Autowired
     private OAuthClientUtil oAuthClientUtil;
@@ -40,7 +38,6 @@ public class AuthExceptionEntryPoint extends OAuth2AuthenticationEntryPoint {
             throws ServletException {
         try {
 
-            //刷新token
             //解析异常，如果是401则处理
             ResponseEntity<?> result = exceptionTranslator.translate(authException);
             if (result.getStatusCode() == HttpStatus.UNAUTHORIZED) {
@@ -63,5 +60,4 @@ public class AuthExceptionEntryPoint extends OAuth2AuthenticationEntryPoint {
             throw new ServletException();
         }
     }
-}
 }
