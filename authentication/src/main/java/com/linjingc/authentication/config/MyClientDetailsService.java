@@ -26,7 +26,7 @@ public class MyClientDetailsService implements ClientDetailsService {
             MyClientDetails myClientDetails = new MyClientDetails();
             //客户端Id
             myClientDetails.setClientId("client_1");
-            //resourceId 用于分配给可授予的clientId
+            //resourceId 用于分配可以访问的资源服务
             Set<String> resourceIds = new HashSet<>();
             resourceIds.add("order");
             myClientDetails.setResourceIds(resourceIds);

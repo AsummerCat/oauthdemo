@@ -37,17 +37,20 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         String finalSecret = "{bcrypt}" + new BCryptPasswordEncoder().encode("123456");
 
-        //内存模式
-        clients.inMemory()
-                .withClient("client_2")
-                .resourceIds(DEMO_RESOURCE_ID)
-                .authorizedGrantTypes("password", "refresh_token")
-                .scopes("select")
-                .authorities("oauth2")
-                .secret("123456")
-                .accessTokenValiditySeconds(100)
-                .refreshTokenValiditySeconds(100);
 
+//        clients
+//                //内存模式
+//                .inMemory()
+//                .withClient("client_2")
+//                .resourceIds(DEMO_RESOURCE_ID)
+//                .authorizedGrantTypes("password", "refresh_token")
+//                .scopes("select")
+//                .authorities("oauth2")
+//                .secret("123456")
+//                .accessTokenValiditySeconds(100)
+//                .refreshTokenValiditySeconds(100);
+
+        //todo 查询数据库 或者查询内容只能选中一个
         //查询数据库
         clients.withClientDetails(new MyClientDetailsService());
 
