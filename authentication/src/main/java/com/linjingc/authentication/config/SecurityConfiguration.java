@@ -66,13 +66,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //开启路径不需要权限访问
-                .antMatchers("/oauth/*", "/","/error/*").permitAll()
+                .antMatchers("/oauth/*", "/", "/error/*").permitAll()
                 //其他路径都需要权限
                 .anyRequest().authenticated();
     }
 
 
-    /** 放行静态资源 */
+    /**
+     * 放行静态资源
+     */
     @Override
     public void configure(WebSecurity web) throws Exception {
         //解决静态资源被拦截的问题

@@ -11,7 +11,6 @@ import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -34,12 +33,13 @@ public class OAuthClientUtil {
 
     /**
      * 获取token
+     *
      * @param username
      * @param password
      * @return
      * @throws OAuthProblemException
      */
-    public String getApiToken(String username, String password)throws OAuthProblemException {
+    public String getApiToken(String username, String password) throws OAuthProblemException {
         logger.info("api getApiToken");
         String accessToken = null;
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
@@ -68,6 +68,7 @@ public class OAuthClientUtil {
 
     /**
      * 刷新token
+     *
      * @param token
      * @return
      * @throws OAuthProblemException

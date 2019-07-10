@@ -14,8 +14,8 @@ public class MyClientDetails implements ClientDetails {
     private String clientId;
     private Set<String> resourceIds;
     private String clientSecret;
-    private  Set<String> scope;
-    private  Set<String> authorizedGrantTypes;
+    private Set<String> scope;
+    private Set<String> authorizedGrantTypes;
     private Collection<GrantedAuthority> authorities;
     private Integer accessTokenValiditySeconds;
     private Integer refreshTokenValiditySeconds;
