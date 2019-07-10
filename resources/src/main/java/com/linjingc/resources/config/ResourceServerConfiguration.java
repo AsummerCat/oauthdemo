@@ -43,6 +43,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 //开启路径不需要权限访问
                 .antMatchers("/").permitAll()
                 //其他路径都需要权限
+                .antMatchers("/product/**").access("#oauth2.hasScope('select') and hasPermission('delete')")
+                //配置order访问控制，必须认证过后才可以访问
+                .antMatchers("/order/**").authenticated()
                 .anyRequest().authenticated();
     }
 }
