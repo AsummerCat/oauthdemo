@@ -13,11 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * @author 徐靖峰[OF2938]
- * company qianmi.com
- * Date 2018-04-25
- */
 @RestController
 @Slf4j
 public class QQCallbackController {
