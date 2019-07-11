@@ -24,8 +24,6 @@ public class AuthExceptionEntryPoint extends OAuth2AuthenticationEntryPoint {
 
     @Value("${basic.errorUrl.unauthorized}")
     private String url;
-    @Autowired
-    private OAuth2ClientProperties oAuth2ClientProperties;
     private WebResponseExceptionTranslator<?> exceptionTranslator = new DefaultWebResponseExceptionTranslator();
     @Autowired
     private OAuthClientUtil oAuthClientUtil;

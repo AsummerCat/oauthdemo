@@ -32,6 +32,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     /**
      * 声明单个客户端及其属性 最少一个 不然无法启动
+     *
      * @param clients
      * @throws Exception
      */
@@ -41,26 +42,27 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         String finalSecret = "{bcrypt}" + new BCryptPasswordEncoder().encode("123456");
 
 
-//        clients
-//                //内存模式
-//                .inMemory()
-//                .withClient("client_2")
-//                .resourceIds(DEMO_RESOURCE_ID)
-//                .authorizedGrantTypes("password", "refresh_token")
-//                .scopes("select")
-//                .authorities("oauth2")
-//                .secret("123456")
-//                .accessTokenValiditySeconds(100)
-//                .refreshTokenValiditySeconds(100);
+        clients
+                //内存模式
+                .inMemory()
+                .withClient("client_2")
+                .resourceIds("order")
+                .authorizedGrantTypes("password", "refresh_token")
+                .scopes("select")
+                .authorities("oauth2")
+                .secret("123456")
+                .accessTokenValiditySeconds(1000)
+                .refreshTokenValiditySeconds(1000);
 
         //todo 查询数据库 或者查询内容只能选中一个
         //查询数据库
-        clients.withClientDetails(new MyClientDetailsService());
+        //clients.withClientDetails(new MyClientDetailsService());
 
     }
 
     /**
      * 配置授权服务器终结点的非安全功能，如令牌存储、令牌自定义、用户批准和授予类型 请求方式
+     *
      * @param endpoints
      * @throws Exception
      */
@@ -73,17 +75,24 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
     }
 
+//    @Bean
+//    @Primary
+//    public DefaultTokenServices tokenServices() {
+//        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+//        defaultTokenServices.setSupportRefreshToken(true);
+//        return defaultTokenServices;
+//    }
 
     /**
      * 配置（授权服务器安全配置器安全）
+     *
      * @param security
      * @throws Exception
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         //允许表单认证
-        security
-                .tokenKeyAccess("permitAll()")
+        security.tokenKeyAccess("permitAll()")
                 .checkTokenAccess("permitAll()")
                 .allowFormAuthenticationForClients();
         //自定义授权失败(forbidden)时返回信息
