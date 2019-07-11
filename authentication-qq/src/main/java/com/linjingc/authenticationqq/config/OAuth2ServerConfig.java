@@ -26,6 +26,7 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
  * 认证服务 和 资源服务
  *
  * @author cxc
+ * @date  2019年7月11日16:38:56
  */
 @Configuration
 public class OAuth2ServerConfig {

@@ -2,6 +2,11 @@ package com.linjingc.authentication.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 区分请求类型
+ * @author cxc
+ * @date  2019年7月11日16:38:56
+ */
 public class HttpUtils {
     /**
      * 从request获取登录的IP

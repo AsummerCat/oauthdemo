@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author cxc
  * 错误自定义页面
+ * @author cxc
+ * @date  2019年7月11日16:38:56
  */
 @Controller
 @RequestMapping("/error")

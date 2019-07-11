@@ -12,6 +12,8 @@ import java.io.IOException;
 
 /**
  * 授权失败(forbidden)时返回信息
+ * @author cxc
+ * @date  2019年7月11日16:38:56
  */
 @Component("customAccessDeniedHandler")
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {

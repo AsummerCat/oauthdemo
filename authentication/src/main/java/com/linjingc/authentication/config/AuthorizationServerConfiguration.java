@@ -13,10 +13,13 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
  * 授权服务
+ * @author cxc
+ * @date  2019年7月11日16:38:56
  */
 @Configuration
 @EnableAuthorizationServer
@@ -51,8 +54,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .scopes("select")
                 .authorities("oauth2")
                 .secret("123456")
-                .accessTokenValiditySeconds(1000)
-                .refreshTokenValiditySeconds(1000);
+                .accessTokenValiditySeconds(30)
+                .refreshTokenValiditySeconds(200);
 
         //todo 查询数据库 或者查询内容只能选中一个
         //查询数据库
@@ -68,20 +71,25 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        // 为解决获取token并发问题
+
+
         endpoints
                 .tokenStore(new RedisTokenStore(redisConnectionFactory))
                 .authenticationManager(authenticationManager)
                 //允许 GET、POST 请求获取 token，即访问端点：oauth/token
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
-    }
 
-//    @Bean
-//    @Primary
-//    public DefaultTokenServices tokenServices() {
-//        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-//        defaultTokenServices.setSupportRefreshToken(true);
-//        return defaultTokenServices;
-//    }
+        // 为解决获取token并发问题
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(endpoints.getTokenStore());
+        //这里表示可以使用刷新token
+        tokenServices.setSupportRefreshToken(true);
+        tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
+        tokenServices.setTokenEnhancer(endpoints.getTokenEnhancer());
+        endpoints.tokenServices(tokenServices);
+
+    }
 
     /**
      * 配置（授权服务器安全配置器安全）

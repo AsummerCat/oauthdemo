@@ -9,6 +9,8 @@ import java.util.Set;
 
 /**
  * 自定义客户端类
+ * @author cxc
+ * @date  2019年7月11日16:38:56
  */
 public class MyClientDetails implements ClientDetails {
     private String clientId;

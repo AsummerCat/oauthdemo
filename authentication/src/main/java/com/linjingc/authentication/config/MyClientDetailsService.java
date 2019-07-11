@@ -14,6 +14,8 @@ import java.util.Set;
 
 /**
  * 获取客户端信息的信息类
+ * @author cxc
+ * @date  2019年7月11日16:38:56
  */
 @Component
 public class MyClientDetailsService implements ClientDetailsService {
