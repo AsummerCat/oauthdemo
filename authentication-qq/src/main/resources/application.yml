@@ -1,0 +1,12 @@
+spring:
+  application:
+     name: authenticationOauth2QQ
+## redis
+  redis:
+    database: 5
+    host: 112.74.43.136
+    port: 6379
+    password: jingbaobao
+
+server:
+   port: 8500
