@@ -69,6 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 //开启路径不需要权限访问
                 .antMatchers("/oauth/*", "/", "/error/*").permitAll()

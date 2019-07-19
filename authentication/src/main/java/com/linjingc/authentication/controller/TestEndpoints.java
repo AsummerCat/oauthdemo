@@ -21,6 +21,4 @@ public class TestEndpoints {
     public String testPath() {
         return "欢迎";
     }
-
-
 }
